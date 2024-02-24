@@ -8,16 +8,19 @@
         <version>3.2.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
+
+    <groupId>by.baranova</groupId>
     <artifactId>SpringBStudents</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SpringBStudents</name>
     <description>SpringBStudents</description>
+
     <properties>
         <java.version>17</java.version>
         <hibernate.version>6.4.4.Final</hibernate.version>
         <postgresql.version>42.7.1</postgresql.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
