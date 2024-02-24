@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="container-md">
+<h1>Список студентов</h1>
+
+<div class="card" style="width: 18rem;" th:each="student : ${students}">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${student.name + ' ' + student.lastName}">Name Surname</h5>
+        <p class="card-text" th:text="${student.phoneNumber}">Phone</p>
+        <a th:href="@{/students/{id}(id=${student.id})}">Подробнее</a>
+        <a th:href="@{/students/update/{id}(id=${student.id})}">Изменить</a>
+        <a th:href="@{/students/delete/{id}(id=${student.id})}">Удалить</a>
+
+
+    </div>
+</div>
+
+<a class="btn btn-secondary" th:href="@{/students/new}">Добавить студента</a>
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
