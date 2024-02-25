@@ -1,6 +1,5 @@
 package by.baranova.springbootstudents.model;
 
-
 import by.baranova.springbootstudents.annotation.ContactNumber;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

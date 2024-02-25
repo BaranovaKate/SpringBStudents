@@ -19,6 +19,4 @@ public class HibernateConfig {
                 .buildMetadata()
                 .buildSessionFactory();
     }
-
-
 }

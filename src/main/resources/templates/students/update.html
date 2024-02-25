@@ -23,7 +23,8 @@
     </div>
     <div class="mb-3">
         <label for="phoneNumber" class="form-label">Введите номер телефона:</label>
-        <input type="text" th:value="*{phoneNumber}" th:field="*{phoneNumber}" class="form-control" id="phoneNumber" placeholder="Номер телефона">
+        <input type="text" th:value="*{phoneNumber}" th:field="*{phoneNumber}" class="form-control" id="phoneNumber"
+               placeholder="Номер телефона">
         <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phoneNumber</div>
     </div>
     <div class="mb-3">
@@ -33,7 +34,8 @@
                placeholder="Дата рождения">
         <div style="color:red"
              th:if="${#fields.hasErrors('birthday')}"
-             th:errors="*{birthday}">birthday</div>
+             th:errors="*{birthday}">birthday
+        </div>
     </div>
     <input class="btn btn-success" type="submit" value="Сохранить"/>
 </form>

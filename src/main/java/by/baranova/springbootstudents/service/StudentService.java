@@ -1,6 +1,4 @@
 package by.baranova.springbootstudents.service;
-
-
 import by.baranova.springbootstudents.exception.EntityNotFoundException;
 import by.baranova.springbootstudents.model.StudentDto;
 import by.baranova.springbootstudents.mapper.StudentMapper;
@@ -16,9 +14,15 @@ import java.util.Optional;
 @Service
 public class StudentService {
 
-    //  private final Map<Long, StudentDto> repository = new HashMap<>();
     private final SessionFactory sessionFactory;
     private final StudentMapper studentMapper;
+    private final String CONST_UPDATE = """
+            UPDATE Student S SET\s
+               S.name = :name,\s
+               S.lastName = :last_name,\s
+               S.phoneNumber = :phone_number,\s
+               S.birthday = :birthday
+            WHERE S.id = :id""";
 
     public StudentService(SessionFactory sessionFactory, StudentMapper studentMapper) {
         this.sessionFactory = sessionFactory;
@@ -30,7 +34,6 @@ public class StudentService {
             Query<Student> query = session.createQuery("FROM Student ", Student.class);
             return query.list();
         });
-
         return students.stream()
                 .map(studentMapper::toDto)
                 .toList();
@@ -42,7 +45,6 @@ public class StudentService {
             query.setParameter("id", id);
             return query.uniqueResultOptional();
         });
-
         if (optionalStudent.isPresent()) {
             final Student student = optionalStudent.get();
             return studentMapper.toDto(student);
@@ -50,18 +52,16 @@ public class StudentService {
         throw new EntityNotFoundException("Студента с ID" + id + "не существует");
     }
 
-
     public void deleteById(Long id) {
         sessionFactory.inTransaction(session -> {
             final MutationQuery query = session.createMutationQuery("""
-                DELETE FROM Student
-                WHERE id = :id
-                """);
+                    DELETE FROM Student
+                    WHERE id = :id
+                    """);
             query.setParameter("id", id);
             query.executeUpdate();
         });
     }
-
 
     public void save(StudentDto studentDto) {
         final Student student = studentMapper.toEntity(studentDto);
@@ -70,17 +70,9 @@ public class StudentService {
         });
     }
 
-
-
     public void update(Long id, StudentDto student) {
         sessionFactory.inTransaction(session -> {
-            final MutationQuery query = session.createMutationQuery("""
-                    UPDATE Student S SET\s
-                       S.name = :name,\s
-                       S.lastName = :last_name,\s
-                       S.phoneNumber = :phone_number,\s
-                       S.birthday = :birthday
-                    WHERE S.id = :id""");
+            final MutationQuery query = session.createMutationQuery(CONST_UPDATE);
 
             query.setParameter("id", id);
             query.setParameter("name", student.getName());
@@ -89,7 +81,6 @@ public class StudentService {
             query.setParameter("birthday", student.getBirthday());
 
             query.executeUpdate();
-
         });
     }
 }
