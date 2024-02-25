@@ -10,7 +10,7 @@ public class ContactNumberValidator implements ConstraintValidator<ContactNumber
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if (value == null) return false;
 
-        return value.matches("[0-9]+")
+        return value.matches("\\d+")
                 && value.length() > 8
                 && value.length() < 15;
     }

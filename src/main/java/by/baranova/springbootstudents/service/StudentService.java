@@ -16,7 +16,7 @@ public class StudentService {
 
     private final SessionFactory sessionFactory;
     private final StudentMapper studentMapper;
-    private final String CONST_UPDATE = """
+    private static final String CONST_UPDATE = """
             UPDATE Student S SET\s
                S.name = :name,\s
                S.lastName = :last_name,\s
