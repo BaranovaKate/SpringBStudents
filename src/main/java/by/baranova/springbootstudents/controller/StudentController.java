@@ -36,14 +36,14 @@ public class StudentController {
 
     @GetMapping("/{id}")
     public String findStudent(Model model, @PathVariable("id") Long id) {
-       try {
-           final StudentDto student = studentService.findStudentById(id);
-           model.addAttribute(CONST_ATTRIBUTE, student);
-           return "students/page";
-       }catch (EntityNotFoundException e) {
-           model.addAttribute("errorMessage", e.getMessage());
-           return "students/error";
-       }
+        try {
+            final StudentDto student = studentService.findStudentById(id);
+            model.addAttribute(CONST_ATTRIBUTE, student);
+            return "students/page";
+        } catch (EntityNotFoundException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "students/error";
+        }
 
     }
 
