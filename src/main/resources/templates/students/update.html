@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Студенты</title>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+</head>
+<body class="container-md">
+
+<form th:method="PUT"
+      th:action="@{/students/{id}(id=${student.id})}"
+      th:object="${student}">
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Введите имя:</label>
+        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Имя">
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name</div>
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">Введите фамилию:</label>
+        <input type="text" th:field="*{lastName}" class="form-control" id="lastName" placeholder="Фамилия">
+        <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName</div>
+    </div>
+    <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Введите номер телефона:</label>
+        <input type="text" th:value="*{phoneNumber}" th:field="*{phoneNumber}" class="form-control" id="phoneNumber"
+               placeholder="Номер телефона">
+        <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">phoneNumber</div>
+    </div>
+    <div class="mb-3">
+        <label for="birthday" class="form-label">Введите дату рождения:</label>
+        <input th:value="${#strings.toString(student.birthday)}" type="date"
+               class="form-control" id="birthday" name="birthday"
+               placeholder="Дата рождения">
+        <div style="color:red"
+             th:if="${#fields.hasErrors('birthday')}"
+             th:errors="*{birthday}">birthday
+        </div>
+    </div>
+    <input class="btn btn-success" type="submit" value="Сохранить"/>
+</form>
+
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
